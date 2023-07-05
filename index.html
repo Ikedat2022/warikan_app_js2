@@ -9,18 +9,18 @@
     <h1>２人用の割り勘アプリ</h1>
     <label for="numberOfPeople2">
       <input type="radio" name="numberOfPeople" id="numberOfPeople2" value=2 checked>2人</label>
-    <label for="numberOfPeople3">
+<!--    <label for="numberOfPeople3">
       <input type="radio" name="numberOfPeople" id="numberOfPeople3" value=3>3人</label>
     <label for="numberOfPeople4">
-      <input type="radio" name="numberOfPeople" id="numberOfPeople4" value=4>4人</label>
+      <input type="radio" name="numberOfPeople" id="numberOfPeople4" value=4>4人</label>-->
     <br>
 
     <select name="darekani" id="darega">
-      <option value="myPayment">私が</option>
+      <option value="myPayment">わたしが</option>
       <option value="yourPayment">あなたが</option>
-      <input type="checkbox" name="toWho" id="toMe" value="toMe">私の分
+      <input type="checkbox" name="toWho" id="toMe" value="toMe">わたしの分
       <input type="checkbox" name="toWho" id="toYou" value="toYou" checked>あなたの分を
-      <input type="checkbox" name="ogori" id="ogori" value="ogori">相手の分をおごりで
+      <input type="checkbox" name="ogori" id="ogori" value="ogori">おごりで
     </select>
     <label for="toBeAddingAmount"></label>
     <input type="number" id="toBeAddingAmount">円を支払いました。
@@ -33,24 +33,24 @@
       <label for="totalAmount">合計金額:</label>
       <input type="number" id="totalAmount" value=0 required>円
       <br>
-      <label for="myTotalAmount">私の分の金額:</label>
-      <input type="number" id="myTotalAmount" value=0 required>円
-      <label for="yourTotalAmount">あなたの分の金額:</label>
-      <input type="number" id="yourTotalAmount" value=0 required>円
-      <br>
-      <label for="myPaymentAmount">私が支払った金額:</label>
-      <input type="number" id="myPaymentAmount" value=0 required>円
-      <label for="myPaymentOgoriAmount">私のおごり:</label>
-      <input type="number" id="myPaymentOgoriAmount" value=0 required>円
-      <br>
+      <label for="myPaymentAmount">わたしが支払った金額:</label>
+      <input type="number" id="myPaymentAmount" value=0 required>円　
       <label for="yourPaymentAmount">あなたが支払った金額:</label>
       <input type="number" id="yourPaymentAmount" value=0 required>円
+      <br>
+      <label for="myTotalAmount">わたしの分の金額:</label>
+      <input type="number" id="myTotalAmount" value=0 required>円　
       <label for="yourPaymentOgoriAmount">あなたのおごり:</label>
       <input type="number" id="yourPaymentOgoriAmount" value=0 required>円
       <br>
-      <button type="button" onclick="test()">計算する!</button>
+      <label for="yourTotalAmount">あなたの分の金額:</label>
+      <input type="number" id="yourTotalAmount" value=0 required>円　
+      <label for="myPaymentOgoriAmount">わたしのおごり:</label>
+      <input type="number" id="myPaymentOgoriAmount" value=0 required>円
+      <br>
+      <button type="button" onclick="alertHowManyPay()">いくら払えばいい？</button>
       <script language="JavaScript" type="text/javascript">
-        function test() {
+        function alertHowManyPay() {
           // 入力値を取得
           let myPaymentAmount = parseInt(document.getElementById('myPaymentAmount').value);
           let yourPaymentAmount = parseInt(document.getElementById('yourPaymentAmount').value);
@@ -60,21 +60,20 @@
           let splitAmount2 = 0;
           let numberOfPeople = 0;
           
-          let toCalculateMyPaymentAmount = yourTotalAmount - myPaymentOgoriAmount;
-          let toCalculateYourPaymentAmount = myTotalAmount - yourPaymentOgoriAmount;
+          let toCalculateMyPaymentAmount = parseInt(document.getElementById('yourTotalAmount').value) - parseInt(document.getElementById('myPaymentOgoriAmount').value);
+          let toCalculateYourPaymentAmount = parseInt(document.getElementById('myTotalAmount').value) - parseInt(document.getElementById('yourPaymentOgoriAmount').value);
           
-          console.log('私の計算後の額：' + toCalculateMyPaymentAmount);
+          console.log('わたしの計算後の額：' + toCalculateMyPaymentAmount);
           console.log('あなたの計算後の額：' + toCalculateYourPaymentAmount);
           console.log('2人：' + document.getElementById('numberOfPeople2').checked);
-          console.log('3人：' + document.getElementById('numberOfPeople3').checked);
-          console.log('4人：' + document.getElementById('numberOfPeople4').checked);
-          console.log(totalAmount);
+          //console.log('3人：' + document.getElementById('numberOfPeople3').checked);
+          //console.log('4人：' + document.getElementById('numberOfPeople4').checked);
           // 2人で割り勘する場合
           if (document.getElementById('numberOfPeople2').checked) {
             if (toCalculateMyPaymentAmount < toCalculateYourPaymentAmount) {
-              alert('私はあなたに' + (myPaymentAmount - yourPaymentAmount) + '円払うね！♡（真顔）');
+              alert('わたしはあなたに' + Math.ceil((toCalculateYourPaymentAmount - toCalculateMyPaymentAmount) / 2) + '円払うね！♡');
             } else if (toCalculateMyPaymentAmount > toCalculateYourPaymentAmount) {
-              alert('あなたは私に' + (yourPaymentAmount - myPaymentAmount) + '円払ってよね！♡（威圧）');
+              alert('あなたはわたしに' + Math.floor((toCalculateMyPaymentAmount - toCalculateYourPaymentAmount) / 2) + '円払ってね！♡（威圧）');
             } else {
               alert('…金額、同じだったね///');
             }
@@ -97,8 +96,8 @@
       </script>
 <!--    <div id="result">
       <h2>割り勘結果</h2>
-      <p>私はあなたに<span id="splitAmount1"></span>円あげるね！♡</p>
-      <p>あなたは私に<span id="splitAmount2"></span>円渡してね！♡</p>
+      <p>わたしはあなたに<span id="splitAmount1"></span>円あげるね！♡</p>
+      <p>あなたはわたしに<span id="splitAmount2"></span>円渡してね！♡</p>
     </div>-->
 
   </body>
