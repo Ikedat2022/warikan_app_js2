@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-
 <body>
   <h1>２人用の割り勘アプリ</h1>
   <label for="numberOfPeople2">
@@ -89,10 +85,10 @@
       if (document.getElementById('numberOfPeople2').checked) {
         if (toCalculateYourPaymentAmount > myPaymentAmount) {
           // わたしが払った金額のほうが私の分の金額よりも多い
-          alert('わたしはあなたに' + Math.ceil((toCalculateYourPaymentAmount - myPaymentAmount) / 2) + '円払うね！♡');
+          alert('わたしはあなたに' + (toCalculateYourPaymentAmount - myPaymentAmount) + '円払うね！♡');
         } else if (toCalculateMyPaymentAmount > yourPaymentAmount) {
            // あなたが払った金額のほうがあなたの分の金額よりも多い
-          alert('あなたはわたしに' + Math.floor((toCalculateMyPaymentAmount - yourPaymentAmount) / 2) + '円払ってね！♡（威圧）');
+          alert('あなたはわたしに' + (toCalculateMyPaymentAmount - yourPaymentAmount) + '円払ってね！♡（威圧）');
         } else {
           alert('…金額、一緒だったね///');
         }
