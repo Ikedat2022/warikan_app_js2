@@ -1,0 +1,115 @@
+/* チェックボックスを非表示にする */
+input[type="checkbox"] {
+    display: none;
+}
+
+/* チェックボックスをボタンスタイルにする */
+label.checkbox-button {
+
+    display: inline-block;
+    padding: 4px 8px;
+    background-color: #eaeaea;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* チェックボックスがチェックされている場合のスタイル */
+input[type="checkbox"]:checked+label.checkbox-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+/* チェックボックスと関連するラベルの間の余白 */
+input[type="checkbox"]+label {
+    margin-right: 4px;
+}
+
+/* セレクトボックスのオプションのスタイル */
+select {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #eaeaea;
+    color: #333;
+}
+
+/* セレクトボックスのオプションホバー時のスタイル */
+select option:hover {
+    background-color: #d5d5d5;
+}
+
+/* セレクトボックスのオプションフォーカス時のスタイル */
+select option:focus {
+    outline: none;
+    background-color: #d5d5d5;
+}
+
+/* セレクトボックスの選択されたオプションのスタイル */
+select option:checked {
+    font-weight: bold;
+}
+
+/* IDセレクタを使用して特定の要素にスタイルを適用する */
+#toBeAddingAmount {
+    padding: 8px;
+    font-size: 16px;
+    border: 3px solid #333;
+    border-radius: 4px;
+    background-color: #eaeaea;
+    color: #333;
+    width: 120px;
+}
+
+/* 入力フィールドのテキスト部分のスタイル */
+#toBeAddingAmount::-webkit-inner-spin-button,
+#toBeAddingAmount::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#toBeAddingAmount::-moz-inner-spin-button,
+#toBeAddingAmount::-moz-outer-spin-button {
+    -moz-appearance: none;
+    margin: 0;
+}
+
+#toBeAddingAmount::-ms-inner-spin-button,
+#toBeAddingAmount::-ms-outer-spin-button {
+    -ms-appearance: none;
+    margin: 0;
+}
+
+/* ボタンのスタイル */
+button {
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ボタンホバー時のスタイル */
+button:hover {
+    background-color: #45a049;
+}
+
+/* ボタンフォーカス時のスタイル */
+button:focus {
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ボタンアクティブ時のスタイル */
+button:active {
+    background-color: #3e8e41;
+}
+
+/* IDセレクタを使用して特定の要素にスタイルを適用する */
+#alertButton {
+    background-color: rgb(255, 115, 0);
+    color: white;
+}

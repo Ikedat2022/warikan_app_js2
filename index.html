@@ -10,15 +10,17 @@
     <label for="numberOfPeople4">
       <input type="radio" name="numberOfPeople" id="numberOfPeople4" value=4>4人</label>-->
   <br>
-
   <select name="darekani" id="darega">
     <option value="myPayment">わたしが</option>
     <option value="yourPayment">あなたが</option>
-    <input type="checkbox" name="toWho" id="toMe" value="toMe">わたしの分を
-    <input type="checkbox" name="toWho" id="toYou" value="toYou" checked>あなたの分を
-    <br>
-    <input type="checkbox" name="ogori" id="ogori" value="ogori">おごりで
+    <input type="checkbox" name="toWho" id="toMe" value="toMe">
+    <label for="toMe" class="checkbox-button">わたしの分を</label>
+    <input type="checkbox" name="toWho" id="toYou" value="toYou" checked>
+    <label for="toYou" class="checkbox-button">あなたの分を</label>
+    <input type="checkbox" name="ogori" id="ogori" value="ogori">
+    <label for="ogori" class="checkbox-button">おごりで</label>
   </select>
+  <br>
   <label for="toBeAddingAmount"></label>
   <input type="number" id="toBeAddingAmount">円を支払いました。
 
@@ -87,7 +89,7 @@
           // わたしが払った金額のほうが私の分の金額よりも多い
           alert('わたしはあなたに' + (toCalculateYourPaymentAmount - myPaymentAmount) + '円払うね！♡');
         } else if (toCalculateMyPaymentAmount > yourPaymentAmount) {
-           // あなたが払った金額のほうがあなたの分の金額よりも多い
+          // あなたが払った金額のほうがあなたの分の金額よりも多い
           alert('あなたはわたしに' + (toCalculateMyPaymentAmount - yourPaymentAmount) + '円払ってね！♡（威圧）');
         } else {
           alert('…金額、一緒だったね///');
