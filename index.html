@@ -2,13 +2,10 @@
 <html>
 
 <body>
-  <h1>２人用の割り勘アプリ</h1>
+  <h1>フレンズ割り勘アプリ</h1>
   <label for="numberOfPeople2">
     <input type="radio" name="numberOfPeople" id="numberOfPeople2" value=2 checked>2人</label>
-  <!--    <label for="numberOfPeople3">
-      <input type="radio" name="numberOfPeople" id="numberOfPeople3" value=3>3人</label>
-    <label for="numberOfPeople4">
-      <input type="radio" name="numberOfPeople" id="numberOfPeople4" value=4>4人</label>-->
+  <!--  <button onclick="location.href='./index_number_of_people_three.html'">人数を3人に変更する</button>-->
   <br>
   <select name="darekani" id="darega">
     <option value="myPayment">わたしが</option>
@@ -66,6 +63,26 @@
   <label for="myPaymentOgoriAmount">わたしのおごり:</label>
   <input type="number" id="myPaymentOgoriAmount" value=0 required>円
   <br>
+  <input type="radio" name="kiriage" id="roundedUpToTheNearest10Yen" value="10">
+  <label for="roundedUpToTheNearest10Yen" class="radio-button">10円単位で支払う</label>
+  <input type="radio" name="kiriage" id="roundedUpToTheNearest100Yen" value="100">
+  <label for="roundedUpToTheNearest100Yen" class="radio-button">100円単位で支払う</label>
+  <input type="radio" name="kiriage" id="roundedUpToTheNearest1000Yen" value="1000">
+  <label for="roundedUpToTheNearest1000Yen" class="radio-button">1000円単位で支払う</label>
+  <input type="radio" name="kiriage" id="roundedUpToTheNearest10000Yen" value="10000">
+  <label for="roundedUpToTheNearest10000Yen" class="radio-button">10000円単位で支払う</label>  
+
+  <button type="button" onclick="clearKiriageRadioButton()">選択解除（1円単位に戻す）</button>
+
+  <script language="JavaScript" type="text/javascript">
+    function clearKiriageRadioButton() {
+      for (const element of document.getElementsByName('kiriage')) {
+        element.checked = false;
+      }
+      alert('あれれ〜？あなたってもしかしてケチなのお〜？ｗ');
+    }
+  </script>
+  <br>
   <button type="button" onclick="alertHowManyPay()" id="alertButton">いくら払えばいい？</button>
   <script language="JavaScript" type="text/javascript">
     function alertHowManyPay() {
@@ -77,46 +94,35 @@
       let splitAmount1 = 0;
       let splitAmount2 = 0;
       let numberOfPeople = 0;
-
       let toCalculateMyPaymentAmount = parseInt(document.getElementById('yourTotalAmount').value) - parseInt(document.getElementById('myPaymentOgoriAmount').value);
       let toCalculateYourPaymentAmount = parseInt(document.getElementById('myTotalAmount').value) - parseInt(document.getElementById('yourPaymentOgoriAmount').value);
-
       console.log('わたしの計算後の額：' + toCalculateMyPaymentAmount);
       console.log('あなたの計算後の額：' + toCalculateYourPaymentAmount);
-      // 2人で割り勘する場合
-      if (document.getElementById('numberOfPeople2').checked) {
-        if (toCalculateYourPaymentAmount > myPaymentAmount) {
-          // わたしが払った金額のほうが私の分の金額よりも多い
-          alert('わたしはあなたに' + (toCalculateYourPaymentAmount - myPaymentAmount) + '円払うね！♡');
-        } else if (toCalculateMyPaymentAmount > yourPaymentAmount) {
-          // あなたが払った金額のほうがあなたの分の金額よりも多い
-          alert('あなたはわたしに' + (toCalculateMyPaymentAmount - yourPaymentAmount) + '円払ってね！♡（威圧）');
-        } else {
-          alert('…金額、一緒だったね///');
+
+      if (toCalculateYourPaymentAmount > myPaymentAmount) {
+        // わたしが払った金額のほうが私の分の金額よりも多い
+        let finallyMyPaymentAmount = toCalculateYourPaymentAmount - myPaymentAmount;
+        for (var i = 0; i < document.getElementsByName('kiriage').length; i++) {
+          if (document.getElementsByName('kiriage')[i].checked) {
+            finallyMyPaymentAmount = (Math.ceil(finallyMyPaymentAmount / document.getElementsByName('kiriage')[i].value) * parseInt(document.getElementsByName('kiriage')[i].value));
+          }
         }
-
-      } else if (document.getElementById('numberOfPeople3').checked) {
-        alert('まだ3人の割り勘は対応外なんです。\nごめんなさい、許してください、何でもしますんで！');
-        console.log('3人を選択');
-      } else if (document.getElementById('numberOfPeople4').checked) {
-        alert('まだ4人の割り勘は対応外なんです。\nごめんなさい、許してください、何でもしますんで！');
-        console.log('4人を選択');
+        alert(`わたしはあなたに${finallyMyPaymentAmount}円払うね！♡`);
+      } else if (toCalculateMyPaymentAmount > yourPaymentAmount) {
+        // あなたが払った金額のほうがあなたの分の金額よりも多い
+        let finallyYourPaymentAmount = toCalculateMyPaymentAmount - yourPaymentAmount;
+        for (var i = 0; i < document.getElementsByName('kiriage').length; i++) {
+          if (document.getElementsByName('kiriage')[i].checked) {
+            finallyYourPaymentAmount = (Math.ceil(finallyYourPaymentAmount / document.getElementsByName('kiriage')[i].value) * parseInt(document.getElementsByName('kiriage')[i].value));
+          }
+        }
+        alert(`あなたはわたしに${finallyYourPaymentAmount}円払ってね！♡（威圧）`);
       } else {
-        console.log('人数のところでエラーが発生しました。');
+        alert('…金額、一緒だったね///');
       }
-
-      // 結果を表示
-      //            document.getElementById('splitAmount1').textContent = splitAmount1.toFixed(0);
-      //            document.getElementById('splitAmount2').textContent = splitAmount2.toFixed(0);
     }
 
   </script>
-  <!--    <div id="result">
-      <h2>割り勘結果</h2>
-      <p>わたしはあなたに<span id="splitAmount1"></span>円あげるね！♡</p>
-      <p>あなたはわたしに<span id="splitAmount2"></span>円渡してね！♡</p>
-    </div>-->
-
 </body>
 
 </html>
