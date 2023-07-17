@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mtbukoh3のGitHub Pages</title>
-    <link rel="stylesheet" href="https://ikedat2022.github.io/warikan_app_js2/index.css">
-  </head>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mtbukoh3のGitHub Pages</title>
+  <link rel="stylesheet" href="https://ikedat2022.github.io/warikan_app_js2/index.css">
+</head>
+
 <body>
   <h1>フレンズ割り勘アプリ</h1>
   <label for="numberOfPeople2">
     <input type="radio" name="numberOfPeople" id="numberOfPeople2" value=2 checked>2人</label>
-  <!--  <button onclick="location.href='./index_number_of_people_three.html'">人数を3人に変更する</button>-->
+  <!--  <button onclick="location.href='https://ikedat2022.github.io/warikan_app_js2/index_number_of_people_three.html'">人数を3人に変更する</button>-->
   <br>
   <select name="darekani" id="darega">
     <option value="myPayment">わたしが</option>
@@ -60,28 +62,35 @@
   <br>
   <label for="myTotalAmount">わたしの分の金額:</label>
   <input type="number" id="myTotalAmount" value=0 required>円　
-  <label for="yourPaymentOgoriAmount">あなたのおごり:</label>
+  <label for="yourPaymentOgoriAmount">あなたがおごった金額:</label>
   <input type="number" id="yourPaymentOgoriAmount" value=0 required>円
   <br>
   <label for="yourTotalAmount">あなたの分の金額:</label>
   <input type="number" id="yourTotalAmount" value=0 required>円　
-  <label for="myPaymentOgoriAmount">わたしのおごり:</label>
+  <label for="myPaymentOgoriAmount">わたしがおごった金額:</label>
   <input type="number" id="myPaymentOgoriAmount" value=0 required>円
   <br>
-  <input type="radio" name="kiriage" id="roundedUpToTheNearest10Yen" value="10">
+  <input type="radio" name="kiriageAndKirisute" id="roundedUpToTheNearest10Yen" value="10">
   <label for="roundedUpToTheNearest10Yen" class="radio-button">10円単位で支払う</label>
-  <input type="radio" name="kiriage" id="roundedUpToTheNearest100Yen" value="100">
+  <input type="radio" name="kiriageAndKirisute" id="roundedUpToTheNearest100Yen" value="100">
   <label for="roundedUpToTheNearest100Yen" class="radio-button">100円単位で支払う</label>
-  <input type="radio" name="kiriage" id="roundedUpToTheNearest1000Yen" value="1000">
+  <input type="radio" name="kiriageAndKirisute" id="roundedUpToTheNearest1000Yen" value="1000">
   <label for="roundedUpToTheNearest1000Yen" class="radio-button">1000円単位で支払う</label>
-  <input type="radio" name="kiriage" id="roundedUpToTheNearest10000Yen" value="10000">
-  <label for="roundedUpToTheNearest10000Yen" class="radio-button">10000円単位で支払う</label>  
+  <input type="radio" name="kiriageAndKirisute" id="roundedUpToTheNearest10000Yen" value="10000">
+  <label for="roundedUpToTheNearest10000Yen" class="radio-button">10000円単位で支払う</label>
+  <br>
+  <input type="radio" name="kiriageAndKirisute" id="roundedDownToTheNearest10Yen" value="10">
+  <label for="roundedDownToTheNearest10Yen" class="radio-button">10円切り捨てで支払う</label>
+  <input type="radio" name="kiriageAndKirisute" id="roundedDownToTheNearest100Yen" value="100">
+  <label for="roundedDownToTheNearest100Yen" class="radio-button">100円切り捨てで支払う</label>
+  <input type="radio" name="kiriageAndKirisute" id="roundedDownToTheNearest1000Yen" value="1000">
+  <label for="roundedDownToTheNearest1000Yen" class="radio-button">1000円切り捨てで支払う</label>
 
   <button type="button" onclick="clearKiriageRadioButton()">選択解除（1円単位に戻す）</button>
 
   <script language="JavaScript" type="text/javascript">
     function clearKiriageRadioButton() {
-      for (const element of document.getElementsByName('kiriage')) {
+      for (const element of document.getElementsByName('kiriageAndKirisute')) {
         element.checked = false;
       }
       alert('あれれ〜？あなたってもしかしてケチなのお〜？ｗ');
@@ -105,20 +114,26 @@
       console.log('あなたの計算後の額：' + toCalculateYourPaymentAmount);
 
       if (toCalculateYourPaymentAmount > myPaymentAmount) {
-        // わたしが払った金額のほうが私の分の金額よりも多い
+        // わたしが払った金額のほうがわたしの分の金額よりも多い
         let finallyMyPaymentAmount = toCalculateYourPaymentAmount - myPaymentAmount;
-        for (var i = 0; i < document.getElementsByName('kiriage').length; i++) {
-          if (document.getElementsByName('kiriage')[i].checked) {
-            finallyMyPaymentAmount = (Math.ceil(finallyMyPaymentAmount / document.getElementsByName('kiriage')[i].value) * parseInt(document.getElementsByName('kiriage')[i].value));
+        for (var i = 0; i < document.getElementsByName('kiriageAndKirisute').length; i++) {
+          if (document.getElementsByName('kiriageAndKirisute')[i].checked && i < 4) {
+            finallyMyPaymentAmount = (Math.ceil(finallyMyPaymentAmount / document.getElementsByName('kiriageAndKirisute')[i].value) * parseInt(document.getElementsByName('kiriageAndKirisute')[i].value));
+          }
+          if (document.getElementsByName('kiriageAndKirisute')[i].checked && i > 3) {
+            finallyMyPaymentAmount = (Math.floor(finallyMyPaymentAmount / document.getElementsByName('kiriageAndKirisute')[i].value) * parseInt(document.getElementsByName('kiriageAndKirisute')[i].value));
           }
         }
         alert(`わたしはあなたに${finallyMyPaymentAmount}円払うね！♡`);
       } else if (toCalculateMyPaymentAmount > yourPaymentAmount) {
         // あなたが払った金額のほうがあなたの分の金額よりも多い
         let finallyYourPaymentAmount = toCalculateMyPaymentAmount - yourPaymentAmount;
-        for (var i = 0; i < document.getElementsByName('kiriage').length; i++) {
-          if (document.getElementsByName('kiriage')[i].checked) {
-            finallyYourPaymentAmount = (Math.ceil(finallyYourPaymentAmount / document.getElementsByName('kiriage')[i].value) * parseInt(document.getElementsByName('kiriage')[i].value));
+        for (var i = 0; i < document.getElementsByName('kiriageAndKirisute').length; i++) {
+          if (document.getElementsByName('kiriageAndKirisute')[i].checked && i < 4) {
+            finallyYourPaymentAmount = (Math.ceil(finallyYourPaymentAmount / document.getElementsByName('kiriageAndKirisute')[i].value) * parseInt(document.getElementsByName('kiriageAndKirisute')[i].value));
+          }
+          if (document.getElementsByName('kiriageAndKirisute')[i].checked && i > 3) {
+            finallyYourPaymentAmount = (Math.floor(finallyYourPaymentAmount / document.getElementsByName('kiriageAndKirisute')[i].value) * parseInt(document.getElementsByName('kiriageAndKirisute')[i].value));
           }
         }
         alert(`あなたはわたしに${finallyYourPaymentAmount}円払ってね！♡（威圧）`);
@@ -128,6 +143,19 @@
     }
 
   </script>
+  <h2>
+    このアプリの目的
+  </h2>
+  <p>割り勘アプリだと、自分と相手が異なる値段を立て替え払いしたとき、平等に計算されてしまってモヤモヤしませんか？</p>
+  <p>開発者自身も端数はあまり考慮しない人ですが、アバウトすぎるとモヤモヤ、いくらくらい多くもらっているのか気になってしまいます。</p>
+  <p>かといって電卓でいちいち足したり引いたりとしていると、入力を間違えてしまったり、1個の電卓でやるのは厳しかったり、そもそもダサいなとか思っていました。</p>
+  <p>そこで誰が誰に入力するか、1個1個の入力するだけで計算される割り勘アプリを作成してみました。</p>
+  <p>単純な割り勘ではないのでまだ2人用しか作成できていませんが、仲の良い友人や取引先の方とでも使っていただけると幸いです。</p>
+  <h2>
+    アプリの計算方法
+  </h2>
+  <p>わたし/あなたが払った金額と(わたし/あなたの支払うべき分の金額-あなた/わたしがおごった金額)を比較します。</p>
+  <p>「いくら払えばいい？」ボタンを押すと、払った金額が多い方に不足分金額を支払うようにアラートを出します。</p>
 </body>
 
 </html>
